@@ -6,20 +6,20 @@
 
     <%= render @user %>
 
-    <div id="microposts" class="min-w-full">
+    <div id="microposts" class="min-w-full pb-5">
       <h2 class='font-medium'>Posts:</h2>
       <% @microposts.each do |micropost| %>
-        <div class='pb-5'>
+        <div class='px-2 py-5 bg-[#293449]'>
           <p><%= micropost.content %></p>
-          <p class='text-sm text-[#92A3B7]'><%= micropost.created_at %></p>
+          <p class='text-sm text-[#7DD3FC]'><%= micropost.created_at %></p>
         </div>
       <% end %>
     </div>
 
-    <%= link_to "Edit this user", edit_user_path(@user), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to "Back to users", users_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Edit this user", edit_user_path(@user), class: "mt-2 rounded-lg py-3 px-5 bg-[#1E283A] inline-block font-medium" %>
+    <%= link_to "Back to users", users_path, class: "ml-2 rounded-lg py-3 px-5 bg-[#1E283A] inline-block font-medium" %>
     <div class="inline-block ml-2">
-      <%= button_to "Destroy this user", @user, method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+      <%= button_to "Destroy this user", @user, method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-[#1E283A] font-medium" %>
     </div>
   </div>
 </div>
