@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
+  # before_action :set_microposts, only: %i[show]
 
   # GET /users or /users.json
   def index
@@ -8,7 +9,9 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    @microposts = @user.microposts
+    @microposts = Micropost.all.each_with_object([]) do |micropost, microposts|
+      microposts << micropost if micropost.user_id == @user.id
+    end
   end
 
   # GET /users/new
@@ -63,6 +66,10 @@ class UsersController < ApplicationController
   def set_user
     @user = User.find(params[:id])
   end
+
+  # def set_microposts
+  #   @micropost =
+  # end
 
   # Only allow a list of trusted parameters through.
   def user_params
