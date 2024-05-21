@@ -11,7 +11,7 @@
     <div
       id="microposts"
       class="
-        w-[54%] h-full border-[1px] border-solid border-gray-700 border-t-0 pb-5
+        w-[54%] h-full border-[1px] border-solid border-gray-700 border-t-0
       "
     >
       <div class='h-[3rem] flex justify-center items-center'>
@@ -26,7 +26,12 @@
       </div>
       <%= render "microposts/form", micropost: @micropost %>
       <% if @microposts.empty? %>
-        <p class='text-white'>No one's written any posts.</p>
+        <p
+          class='
+            text-white text-center border-[1px] border-solid border-gray-700 border-l-0
+            border-r-0 border-b-0 pt-4
+          '
+        >No one's written any posts.</p>
       <% else %>
         <% @microposts.reverse.each do |micropost| %>
           <div
@@ -47,7 +52,11 @@
             </div>
             <div class='flex flex-col flex-grow'>
               <div class='flex gap-2 items-center'>
-                <span class='font-bold pb-1'><%= User.find_by(id: micropost.user_id).name %></span>
+                <span class='font-bold pb-1'>
+                  <%= link_to "#{User.find_by(id: micropost.user_id).name}",
+                  User.find_by(id: micropost.user_id),
+                  class: "font-medium hover:text-[#1D9AF1]" %>
+                </span>
                 <span class='text-sm text-gray-500'><%= micropost.created_at %></span>
               </div>
               <p class='text-sm'><%= micropost.content %></p>
@@ -72,22 +81,24 @@
         w-[25%] h-full p-5 rounded-2xl border-[1px] border-solid border-gray-700 mt-4
       "
     >
-      <h2 class='font-bold text-xl'>Users</h2>
+      <h2 class='font-bold text-xl'>
+        <%= "#{@users.length == 1 ? @users.length.to_s + " user" : @users.length.to_s + " users"}" %>
+      </h2>
       <% @users.each do |user| %>
         <div>
           <%= render user %>
         </div>
       <% end %>
-      <div
+      <button
         class='
-          flex justify-center items-center gap-2 text-xl rounded-3xl py-2 px-5
-          bg-[#1D9AF1]
+          w-full flex justify-center items-center gap-2 text-xl rounded-3xl py-2 px-5
+          bg-[#1D9AF1] mt-4
         '
       >
         <%= link_to "Make user",
         new_user_path,
-        class: "text-white inline-block font-medium text-md cursor-pointer" %>
-      </div>
+        class: "text-white inline-block font-medium text-md" %>
+      </button>
 
     </div>
 

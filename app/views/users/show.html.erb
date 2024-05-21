@@ -12,7 +12,7 @@
     <%= render @user %>
 
     <div id="user_microposts" class="min-w-full pb-5">
-      <h2 class='font-medium pb-2 text-xl'>Posts:</h2>
+      <h2 class='font-medium pb-2 text-md'>Posts:</h2>
       <% if @user_microposts.empty? %>
         <p class='text-white'>The user hasn't written any posts.</p>
       <% else %>
@@ -21,7 +21,15 @@
             <div class='px-2 py-5'>
               <p><%= user_micropost.content %></p>
               <p class='text-sm text-[#7DD3FC]'><%= user_micropost.created_at %></p>
-              <%= link_to "Edit", edit_micropost_path(user_micropost), class: "text-sm underline" %>
+              <div class='flex gap-2 font-medium'>
+                <%= link_to "Edit",
+                edit_micropost_path(user_micropost),
+                class: "text-sm text-gray-500 underline pt-3 hover:text-[#1D9AF1]" %>
+                <%= button_to "Destroy",
+                user_micropost,
+                method: :delete,
+                class: "text-sm text-gray-500 underline pt-3 hover:text-red-800" %>
+              </div>
             </div>
           <% end %>
         </div>
