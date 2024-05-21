@@ -22,7 +22,10 @@
             flex items-center
           '
         >
-          <h2 class='text-xl font-bold'>Feed</h2>
+          <h2 class='text-xl font-bold'>
+            <i class="fa-solid fa-comment-dots pr-1"></i>
+            Feed
+          </h2>
         </div>
       </div>
       <%= render "microposts/form", micropost: @micropost %>
@@ -74,6 +77,16 @@
           </div>
         <% end %>
       <% end %>
+      <% if @microposts.length >= 1 %>
+        <div
+          class='
+            border-[1px] border-solid border-gray-700 border-l-0 border-r-0 border-b-0
+            text-center p-5
+          '
+        >
+          Oops No more posts...
+        </div>
+      <% end %>
     </div>
     <!-- users -->
     <div class='flex flex-col w-[30%] h-full'>
@@ -121,7 +134,7 @@
           <i class="fa-solid fa-user pr-1"></i>
           Users
         </h2>
-        <% @users.each do |user| %>
+        <% @users.reverse.each do |user| %>
           <div>
             <%= render user %>
           </div>
