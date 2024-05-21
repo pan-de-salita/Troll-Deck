@@ -1,17 +1,18 @@
 <div class="w-full">
-  <div class='px-40 flex justify-between'>
+  <div class='px-30 flex justify-between gap-8'>
     <% content_for :title, "Users", class: "text-2xl" %>
     <!-- nav -->
-    <div class='w-[15%] flex flex-col gap-4 pt-4'>
+    <div class='w-[20%] flex flex-col gap-4 pt-4'>
       <h1 class="logo font-bold text-5xl pb-5">Y</h1>
-      <p>Y is a simplified Twitter (not X) clone, offering admins full control
-        over user profiles and microposts via CRUD operations.</p>
+      <p class='font-medium text-xl'>Y — meaning 'and' in Spanish — is a barebones clone of Twitter/X,
+        offering admins full control over user profiles and microposts via CRUD
+        operations.</p>
     </div>
     <!-- feed -->
     <div
       id="microposts"
       class="
-        w-[54%] h-full border-[1px] border-solid border-gray-700 border-t-0
+        w-[55%] h-full border-[1px] border-solid border-gray-700 border-t-0
       "
     >
       <div class='h-[3rem] flex justify-center items-center'>
@@ -21,7 +22,7 @@
             flex items-center
           '
         >
-          <h2 class='text-sm font-bold'>Feed</h2>
+          <h2 class='text-xl font-bold'>Feed</h2>
         </div>
       </div>
       <%= render "microposts/form", micropost: @micropost %>
@@ -75,32 +76,67 @@
       <% end %>
     </div>
     <!-- users -->
-    <div
-      id="users"
-      class="
-        w-[25%] h-full p-5 rounded-2xl border-[1px] border-solid border-gray-700 mt-4
-      "
-    >
-      <h2 class='font-bold text-xl'>
-        <%= "#{@users.length == 1 ? @users.length.to_s + " user" : @users.length.to_s + " users"}" %>
-      </h2>
-      <% @users.each do |user| %>
-        <div>
-          <%= render user %>
-        </div>
-      <% end %>
-      <button
-        class='
-          w-full flex justify-center items-center gap-2 text-xl rounded-3xl py-2 px-5
-          bg-[#1D9AF1] mt-4
-        '
+    <div class='flex flex-col w-[30%] h-full'>
+      <div
+        class="
+          p-5 rounded-2xl border-[1px] border-solid border-gray-700 mt-4 flex flex-col
+          gap-4
+        "
       >
-        <%= link_to "Make user",
-        new_user_path,
-        class: "text-white inline-block font-medium text-md" %>
-      </button>
+        <h2 class='font-bold text-xl'>
+          <i class="fa-solid fa-chart-line pr-1"></i>
+          Quick facts
+        </h2>
+        <span class='font-medium text-sm'>
+          Number of users:
+          <span class='text-[#1D9AF1]'>
+            <%= @users.length %>
+          </span>
+        </span>
+        <span class='font-medium text-sm'>
+          Number of posts:
+          <span class='text-[#1D9AF1]'>
+            <%= @microposts.length %>
+          </span>
+        </span>
+        <span class='font-medium text-sm'>
+          Last micropost posted at:
+          <span class='text-[#1D9AF1]'>
+            <%= @microposts.reverse[0].created_at.to_s.chars.drop(5).join %>
+          </span>
+        </span>
+        <span class='font-medium text-sm'>
+          Last micropost by:
+          <span class='text-[#1D9AF1]'>
+            <%= User.find_by(id: @microposts.reverse[0].user_id).name %>
+          </span>
+        </span>
 
+      </div>
+      <div
+        id="users"
+        class="p-5 rounded-2xl border-[1px] border-solid border-gray-700 mt-4"
+      >
+        <h2 class='font-bold text-xl'>
+          <i class="fa-solid fa-user pr-1"></i>
+          Users
+        </h2>
+        <% @users.each do |user| %>
+          <div>
+            <%= render user %>
+          </div>
+        <% end %>
+        <button
+          class='
+            w-full flex justify-center items-center gap-2 text-xl rounded-3xl py-2 px-5
+            bg-[#1D9AF1] mt-4
+          '
+        >
+          <%= link_to "Make user",
+          new_user_path,
+          class: "text-white inline-block font-medium text-md" %>
+        </button>
+      </div>
     </div>
-
   </div>
 </div>

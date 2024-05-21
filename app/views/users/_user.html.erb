@@ -8,6 +8,6 @@
   </span>
 
   <span class='text-sm text-gray-500'>
-    <%= "#{user.microposts.length} posts" %>
+    <%= "#{user.microposts.length == 1 ? user.microposts.length.to_s + " post" : user.microposts.length.to_s + " posts"}" %>
   </span>
 </div>
