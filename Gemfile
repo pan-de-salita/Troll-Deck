@@ -74,3 +74,5 @@ group :production do
 end
 
 # gem "erb-formatter", "~> 0.7.2"
+
+gem 'font-awesome-sass', '~> 6.0'

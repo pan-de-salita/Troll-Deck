@@ -5,11 +5,13 @@ class UsersController < ApplicationController
   # GET /users or /users.json
   def index
     @users = User.all
+    @microposts = Micropost.all
+    @micropost = Micropost.new
   end
 
   # GET /users/1 or /users/1.json
   def show
-    @microposts = Micropost.all.each_with_object([]) do |micropost, microposts|
+    @user_microposts = Micropost.all.each_with_object([]) do |micropost, microposts|
       microposts << micropost if micropost.user_id == @user.id
     end
   end

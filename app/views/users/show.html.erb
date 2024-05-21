@@ -11,17 +11,17 @@
 
     <%= render @user %>
 
-    <div id="microposts" class="min-w-full pb-5">
-      <h2 class='font-medium pb-2'>Posts:</h2>
-      <% if @microposts.empty? %>
+    <div id="user_microposts" class="min-w-full pb-5">
+      <h2 class='font-medium pb-2 text-xl'>Posts:</h2>
+      <% if @user_microposts.empty? %>
         <p class='text-white'>The user hasn't written any posts.</p>
       <% else %>
         <div class='rounded-lg bg-[#293449]'>
-          <% @microposts.each do |micropost| %>
+          <% @user_microposts.each do |user_micropost| %>
             <div class='px-2 py-5'>
-              <p><%= micropost.content %></p>
-              <p class='text-sm text-[#7DD3FC]'><%= micropost.created_at %></p>
-              <%= link_to "Edit", edit_micropost_path(micropost), class: "text-sm underline" %>
+              <p><%= user_micropost.content %></p>
+              <p class='text-sm text-[#7DD3FC]'><%= user_micropost.created_at %></p>
+              <%= link_to "Edit", edit_micropost_path(user_micropost), class: "text-sm underline" %>
             </div>
           <% end %>
         </div>

@@ -1,12 +1,13 @@
-<div id="<%= dom_id user %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1 text-xl text-gray-500">Name:</strong>
-    <%= user.name %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1 text-xl text-gray-500">Email:</strong>
+<div id="<%= dom_id user %>" class='flex flex-col py-4'>
+  <span class="text-sm text-gray-500">
     <%= user.email %>
-  </p>
+  </span>
 
+  <span class="font-bold">
+    <%= link_to "#{user.name}", user, class: "font-medium hover:text-[#1D9AF1]" %>
+  </span>
+
+  <span class='text-sm text-gray-500'>
+    <%= "#{user.microposts.length} posts" %>
+  </span>
 </div>
