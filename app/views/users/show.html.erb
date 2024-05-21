@@ -17,7 +17,7 @@
         <p class='text-white'>The user hasn't written any posts.</p>
       <% else %>
         <div class='rounded-lg bg-[#293449]'>
-          <% @user_microposts.each do |user_micropost| %>
+          <% @user_microposts.reverse.each do |user_micropost| %>
             <div class='px-2 py-5'>
               <p><%= user_micropost.content %></p>
               <p class='text-sm text-[#7DD3FC]'><%= user_micropost.created_at %></p>
