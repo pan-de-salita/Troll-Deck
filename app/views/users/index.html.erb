@@ -1,18 +1,50 @@
 <div class="w-full">
-  <div class='px-30 flex justify-between gap-8'>
+  <div class='sm:px-0 md:px-40 lg:px-40 flex justify-between gap-8'>
     <% content_for :title, "Users", class: "text-2xl" %>
     <!-- nav -->
-    <div class='w-[20%] flex flex-col gap-4 pt-4'>
-      <h1 class="logo font-bold text-5xl pb-5">Y</h1>
-      <p class='font-medium text-xl'>Y — meaning 'and' in Spanish — is a barebones clone of Twitter/X for
-        admins, offering its users full control (not really) over profiles and
-        microposts via CRUD operations.</p>
+    <div class='sm:w-[10%] md:w-[25%] lg:w-[25%] flex flex-col gap-8 pt-4'>
+      <h1 class="sm:hidden md:block lg:block logo font-bold text-5xl">
+        Troll Deck
+      </h1>
+      <div
+        class='
+          sm:block md:hidden lg:hidden text-5xl flex sm:justify-center md:justify-start
+          lg:justify-start
+        '
+      >
+        <i class="fa-solid fa-skull"></i>
+      </div>
+      <p class='sm:hidden md:block lg:block font-medium text-md text-gray-500 pb-5'>
+        Troll Deck is a onestop shop for your trolling needs. Draft microposts
+        as multiple users, then regret it after.
+      </p>
+      <div
+        class='
+          flex flex-col sm:items-center md:items-start md:items-start gap-4 text-xl
+          font-bold
+        '
+      >
+        <div class='flex gap-2 items-center'>
+          <i class="sm:text-2xl md:text-xl lg:text-xl fa-solid fa-book-skull"></i>
+          <%= link_to "New micropost",
+          new_micropost_path,
+          class: "sm:hidden md:inline-block lg:inline-block" %>
+        </div>
+        <div class='flex gap-2 items-center'>
+          <i class="sm:text-xl md:text-lg lg:text-lg fa-solid fa-user-plus"></i>
+          <%= link_to "New troll",
+          new_user_path,
+          class: "sm:hidden md:inline-block lg:inline-block" %>
+        </div>
+      </div>
+
     </div>
     <!-- feed -->
     <div
       id="microposts"
       class="
-        w-[55%] h-full border-[1px] border-solid border-gray-700 border-t-0
+        sm:w-full md:w-[60%] md:w-[60%] h-full border-[1px] border-solid border-gray-700
+        border-t-0
       "
     >
       <div class='h-[3rem] flex justify-center items-center'>
@@ -23,8 +55,7 @@
           '
         >
           <h2 class='text-xl font-bold'>
-            <i class="fa-solid fa-comment-dots pr-1"></i>
-            Feed
+            Your microposts
           </h2>
         </div>
       </div>
@@ -62,7 +93,13 @@
                   User.find_by(id: micropost.user_id),
                   class: "font-medium hover:text-[#1D9AF1]" %>
                 </span>
-                <span class='text-sm text-gray-500'><%= micropost.created_at %></span>
+                <span class='text-sm text-gray-500'>
+                  <%= if micropost.created_at.to_s.split(" ")[0] == Time.now.to_s.slice(0, 10)
+                    "Today, #{micropost.created_at.to_s.split(" ").drop(1).join(" ")}"
+                  else
+                    micropost.created_at
+                  end %>
+                </span>
               </div>
               <p class='text-sm'><%= micropost.content %></p>
               <div class='flex gap-2 font-medium'>
@@ -90,37 +127,44 @@
       <% end %>
     </div>
     <!-- users -->
-    <div class='flex flex-col w-[30%] h-full'>
+    <div class='flex flex-col w-[35%] h-full sm:hidden md:block lg:block'>
       <div
         class="
           p-5 rounded-2xl border-[1px] border-solid border-gray-700 mt-4 flex flex-col
           gap-4
         "
       >
-        <h2 class='font-bold text-xl'>
-          <i class="fa-solid fa-chart-line pr-1"></i>
-          Quick facts
-        </h2>
+        <div class='flex gap-2 items-center'>
+          <i class="fa-solid fa-chart-line text-xl"></i>
+          <h2 class='font-bold text-xl'>
+            Quick facts
+          </h2>
+        </div>
         <span class='font-medium text-sm'>
-          Number of users:
+          Number of trolls:
           <span class='text-[#1D9AF1]'>
             <%= @users.length %>
           </span>
         </span>
         <span class='font-medium text-sm'>
-          Number of posts:
+          Number of microposts:
           <span class='text-[#1D9AF1]'>
             <%= @microposts.length %>
           </span>
         </span>
         <span class='font-medium text-sm'>
-          Last micropost posted at:
+          Last micropost time:
           <span class='text-[#1D9AF1]'>
-            <%= @microposts.reverse[0].created_at.to_s.chars.drop(5).join %>
+            <%= if @microposts.reverse[0].created_at.to_s.split(" ")[0] ==
+                 Time.now.to_s.slice(0, 10)
+              "Today, #{@microposts.reverse[0].created_at.to_s.split(" ").drop(1).join(" ")}"
+            else
+              micropost.created_at
+            end %>
           </span>
         </span>
         <span class='font-medium text-sm'>
-          Last micropost by:
+          Last troll to speak:
           <span class='text-[#1D9AF1]'>
             <%= User.find_by(id: @microposts.reverse[0].user_id).name %>
           </span>
@@ -131,10 +175,12 @@
         id="users"
         class="p-5 rounded-2xl border-[1px] border-solid border-gray-700 mt-4"
       >
-        <h2 class='font-bold text-xl'>
-          <i class="fa-solid fa-user pr-1"></i>
-          Users
-        </h2>
+        <div class='flex gap-2 items-center'>
+          <i class="fa-regular fa-face-grin-squint-tears text-xl"></i>
+          <h2 class='font-bold text-xl'>
+            Your trolls
+          </h2>
+        </div>
         <% @users.reverse.each do |user| %>
           <div>
             <%= render user %>
@@ -146,7 +192,7 @@
             bg-[#1D9AF1] mt-4
           '
         >
-          <%= link_to "Make user",
+          <%= link_to "Make troll",
           new_user_path,
           class: "text-white inline-block font-medium text-md" %>
         </button>
