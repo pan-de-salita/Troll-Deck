@@ -1,40 +1,38 @@
 <div class="w-full">
-  <div class='sm:px-0 md:px-40 lg:px-40 flex justify-between gap-8'>
+  <div class='sm:px-0 md:px-0 lg:px-40 flex justify-between gap-8'>
     <% content_for :title, "Users", class: "text-2xl" %>
     <!-- nav -->
-    <div class='sm:w-[10%] md:w-[25%] lg:w-[25%] flex flex-col gap-8 pt-4'>
-      <h1 class="sm:hidden md:block lg:block logo font-bold text-5xl">
+    <div class='sm:w-[10%] md:w-[10%] lg:w-[25%] flex flex-col gap-8 pt-4'>
+      <h1 class="sm:hidden md:hidden lg:block logo font-bold text-5xl">
         Troll Deck
       </h1>
       <div
         class='
-          sm:block md:hidden lg:hidden text-5xl flex sm:justify-center md:justify-start
+          sm:block md:block lg:hidden text-5xl flex sm:justify-center md:justify-center
           lg:justify-start
         '
       >
         <i class="fa-solid fa-skull"></i>
       </div>
-      <p class='sm:hidden md:block lg:block font-medium text-md text-gray-500 pb-5'>
+      <p class='sm:hidden md:hidden lg:block font-medium text-md text-gray-500 pb-5'>
         Troll Deck is a onestop shop for your trolling needs. Draft microposts
         as multiple users, then regret it after.
       </p>
       <div
         class='
-          flex flex-col sm:items-center md:items-start md:items-start gap-4 text-xl
+          flex flex-col sm:items-center md:items-center lg:items-start gap-4 text-xl
           font-bold
         '
       >
         <div class='flex gap-2 items-center hover:text-[#1D9AF1]'>
-          <i class="sm:text-2xl md:text-xl lg:text-xl fa-solid fa-book-skull pr-1"></i>
+          <i class="sm:text-2xl md:text-2xl lg:text-xl fa-solid fa-book-skull pr-1"></i>
           <%= link_to "New micropost",
           new_micropost_path,
-          class: "sm:hidden md:inline-block lg:inline-block" %>
+          class: "sm:hidden md:hidden lg:inline-block" %>
         </div>
         <div class='flex gap-2 items-center hover:text-[#1D9AF1]'>
-          <i class="sm:text-xl md:text-lg lg:text-lg fa-solid fa-user-plus"></i>
-          <%= link_to "New troll",
-          new_user_path,
-          class: "sm:hidden md:inline-block lg:inline-block" %>
+          <i class="sm:text-xl md:text-xl lg:text-lg fa-solid fa-user-plus"></i>
+          <%= link_to "New troll", new_user_path, class: "sm:hidden md:hidden lg:inline-block" %>
         </div>
       </div>
 
@@ -43,7 +41,7 @@
     <div
       id="microposts"
       class="
-        sm:w-full md:w-[60%] md:w-[60%] h-full border-[1px] border-solid border-gray-700
+        sm:w-full md:w-full lg:w-[60%] h-full border-[1px] border-solid border-gray-700
         border-t-0
       "
     >
@@ -126,7 +124,7 @@
       <% end %>
     </div>
     <!-- users -->
-    <div class='flex flex-col w-[35%] h-full sm:hidden md:block lg:block'>
+    <div class='flex flex-col w-[35%] h-full sm:hidden md:hidden lg:block'>
       <div
         class="
           p-5 rounded-2xl border-[1px] border-solid border-gray-700 mt-4 flex flex-col
