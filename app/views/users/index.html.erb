@@ -24,13 +24,13 @@
           font-bold
         '
       >
-        <div class='flex gap-2 items-center'>
-          <i class="sm:text-2xl md:text-xl lg:text-xl fa-solid fa-book-skull"></i>
+        <div class='flex gap-2 items-center hover:text-[#1D9AF1]'>
+          <i class="sm:text-2xl md:text-xl lg:text-xl fa-solid fa-book-skull pr-1"></i>
           <%= link_to "New micropost",
           new_micropost_path,
           class: "sm:hidden md:inline-block lg:inline-block" %>
         </div>
-        <div class='flex gap-2 items-center'>
+        <div class='flex gap-2 items-center hover:text-[#1D9AF1]'>
           <i class="sm:text-xl md:text-lg lg:text-lg fa-solid fa-user-plus"></i>
           <%= link_to "New troll",
           new_user_path,
@@ -81,10 +81,9 @@
                 items-center
               '
             >
-              <span class='logo text-xl text-white font-bold'>
-                <%= link_to "#{User.find_by(id: micropost.user_id).name[0]}",
-                User.find_by(id: micropost.user_id) %>
-              </span>
+              <%= link_to "#{User.find_by(id: micropost.user_id).name[0]}",
+              User.find_by(id: micropost.user_id),
+              class: "logo text-xl text-white font-bold" %>
             </div>
             <div class='flex flex-col flex-grow'>
               <div class='flex gap-2 items-center'>
@@ -186,16 +185,10 @@
             <%= render user %>
           </div>
         <% end %>
-        <button
-          class='
-            w-full flex justify-center items-center gap-2 text-xl rounded-3xl py-2 px-5
-            bg-[#1D9AF1] mt-4
-          '
-        >
-          <%= link_to "Make troll",
-          new_user_path,
-          class: "text-white inline-block font-medium text-md" %>
-        </button>
+        <%= link_to "Make troll",
+        new_user_path,
+        class:
+          "text-white text-center inline-block font-medium text-md text-xl rounded-3xl py-2 px-5 bg-[#1D9AF1] mt-4 w-full" %>
       </div>
     </div>
   </div>
